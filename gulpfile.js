@@ -4,7 +4,6 @@ var gulp = require('gulp'),
   minifycss = require('gulp-minify-css'),
   jshint = require('gulp-jshint'),
   uglify = require('gulp-uglify'),
-  imagemin = require('gulp-imagemin'),
   rename = require('gulp-rename'),
   concat = require('gulp-concat'),
   notify = require('gulp-notify'),
@@ -93,13 +92,6 @@ gulp.task('scripts', function() {
     //.pipe(uglify())
     .pipe(gulp.dest('build'))
     .pipe(notify({ message: 'Scripts task complete' }));
-});
-
-gulp.task('images', function() {
-  return gulp.src('src/images/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('build'))
-    .pipe(notify({ message: 'Images task complete' }));
 });
 
 gulp.task('copy', function() {
