@@ -3,14 +3,16 @@
 module.exports = React.createClass({
   getInitialState: function () {
     return {
-      currentPage: 0
+      currentStart: 0
     };
   },
   previous: function(e) {
-    this.props.prev(this.state.currentPage);
+    this.props.prev(this.state.currentStart - 20);
+    this.setState({currentStart: this.state.currentStart - 20})
   },
   next: function(e) {
-    this.props.next(this.state.currentPage);
+    this.props.next(this.state.currentStart + 20);
+    this.setState({currentStart: this.state.currentStart + 20})
   },
   render: function() {
     return (

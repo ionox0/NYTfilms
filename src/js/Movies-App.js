@@ -5,8 +5,11 @@ var MovieList = require('./views/movie-list');
 
 module.exports = React.createClass({
   loadMovies: function(offset) {
+    console.log(this.state);
+    var url = offset ? 'http://localhost:1337/api.nytimes.com/svc/movies/v2/reviews/picks.json?&offset=' + offset + '&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351' :
+      'http://localhost:1337/api.nytimes.com/svc/movies/v2/reviews/picks.json?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351'
     $.ajax({
-      url: 'http://localhost:1337/api.nytimes.com/svc/movies/v2/reviews/picks.json?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351', //pagination: ' + offset? 'offset=' + offset:'' + '
+      url: url,
       dataType: 'json',
       success: function(data){
         this.setState({data: data});
@@ -27,7 +30,6 @@ module.exports = React.createClass({
     console.log(currentPage);
   },
   nextPage: function(currentPage){
-    console.log('here');
     this.loadMovies(currentPage);
   },
   render: function(){
