@@ -1,0 +1,17 @@
+.navigation-controls {
+	margin: 50px;
+	button {
+		margin: 20px;
+		padding: 7px 20px;
+	  color: white;
+	  border: none;
+	  font-family: manifesto;
+	  border-radius: 4px;
+	  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	  background: #42b8dd;
+	  &:hover {
+	  	cursor: pointer;
+	  	background-color: #338298;
+	  }
+	}
+}

@@ -5,7 +5,6 @@ var MovieList = require('./views/movie-list');
 
 module.exports = React.createClass({
   loadMovies: function(offset) {
-    console.log(this.state);
     var url = offset ? 'http://localhost:1337/api.nytimes.com/svc/movies/v2/reviews/picks.json?&offset=' + offset + '&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351' :
       'http://localhost:1337/api.nytimes.com/svc/movies/v2/reviews/picks.json?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351'
     $.ajax({
@@ -24,19 +23,16 @@ module.exports = React.createClass({
   },
   componentDidMount: function(){
     this.loadMovies();
-    //setInterval(this.loadItemsFromServer, this.props.pollInterval);
+    //setInterval(this.loadMovies, this.props.pollInterval);
   },
-  previousPage: function(currentPage){
-    console.log(currentPage);
-  },
-  nextPage: function(currentPage){
+  navigate: function(currentPage){
     this.loadMovies(currentPage);
   },
   render: function(){
     return (
       <div className='app'>
-        <h1>Critics&#39; Picks</h1>
-        <MovieList data={this.state.data.results} prev={this.previousPage} next={this.nextPage} />
+        <h1>New York Times Movie Critics&#39; Picks</h1>
+        <MovieList data={this.state.data.results} navigate={this.navigate} />
       </div>
     );
   }

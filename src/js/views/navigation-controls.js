@@ -7,11 +7,12 @@ module.exports = React.createClass({
     };
   },
   previous: function(e) {
-    this.props.prev(this.state.currentStart - 20);
+    if (this.state.currentStart < 20) return;
+    this.props.navigate(this.state.currentStart - 20);
     this.setState({currentStart: this.state.currentStart - 20})
   },
   next: function(e) {
-    this.props.next(this.state.currentStart + 20);
+    this.props.navigate(this.state.currentStart + 20);
     this.setState({currentStart: this.state.currentStart + 20})
   },
   render: function() {

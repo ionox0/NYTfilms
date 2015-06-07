@@ -1,7 +1,10 @@
+@import 'fonts';
 @import 'variables';
-@import 'movies-app';
+@import 'movie-list';
+@import 'navigation-controls';
 
 body {
-	background-color: #CCCCCC;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: #083293;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e4f5fc), color-stop(50%,#bfe8f9), color-stop(51%,#9fd8ef), color-stop(100%,#026b88));
+	font-family: pier-regular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

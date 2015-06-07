@@ -13,7 +13,7 @@ module.exports = React.createClass({
     return (
       <div className="movies-list">
         {itemNodes}
-        <NavigationControls prev={this.props.prev} next={this.props.next} />
+        <NavigationControls navigate={this.props.navigate} />
       </div>
     );
   }

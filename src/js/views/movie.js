@@ -10,22 +10,41 @@ module.exports = React.createClass({
     e.preventDefault();
     this.props.onItemRemove(this.props.data);
   },
-  setTooltip: function(e) {
-    console.log(React.findDOMNode(this));
-    $(React.findDOMNode(this)).tipsy({
-      title: function() { return this.getAttribute('data-summary'); }, 
-      gravity: 'sw' 
+  componentDidMount: function(){
+    $(React.findDOMNode(this))
+      .hover(
+        function(){ $(this).addClass('rotate'); },
+        function(){ $(this).removeClass('rotate'); }
+      );
+  },
+  deentitify: function(string){
+    var entity = { 
+      amp: '&',
+      quot: '"',
+      rsquo: '\'',
+      rsquo: '\'',
+      ldquo: '\"',
+      rdquo: '\"',
+      lt: '<',
+      gt: '>'
+    };
+    return string.replace(/&([^&;]+);/g, function(a, b) {
+      var r = entity[b];
+      return typeof r === 'string' ? r : a;
     });
   },
-  componentDidMount: function(){
-    this.setTooltip();
-  },
   render: function() {
-    if (this.props.data.multimedia) var img = <img className='image' src={this.props.data.multimedia.resource.src}/>
+    if (this.props.data.multimedia) 
+      var img = <img className='image' src={this.props.data.multimedia.resource.src}/>
     return (
-      <div className='movie' data-summary={this.props.data.summary_short}>
-        <div className='title'>{this.props.data.display_title}</div>
-        {img}
+      <div className='movie'>
+        <div className='movie-wrapper'>
+          <div className='title'>{this.deentitify(this.props.data.display_title)}</div>
+          {img}
+        </div>
+        <div className='movie-info'>
+          <div className='description'>{this.deentitify(this.props.data.summary_short)}</div>
+        </div>
       </div>
     );
   }

@@ -94,9 +94,14 @@ gulp.task('scripts', function() {
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
-gulp.task('copy', function() {
+gulp.task('copy-normalize', function() {
    gulp.src('./bower_components/normalize.css/normalize.css')
    .pipe(gulp.dest('./build'));
+});
+
+gulp.task('copy-fonts', function() {
+  return gulp.src(['./src/assets/*'])
+  .pipe(gulp.dest('./build/assets'));
 });
 
 gulp.task('watch', function() {
@@ -112,5 +117,5 @@ gulp.task('watch', function() {
 
 
 gulp.task('dev', ['clean'], function() {
-  gulp.start('html', 'sass', 'browserify', 'watch');
+  gulp.start('html', 'sass', 'browserify', 'copy-fonts', 'watch');
 });
