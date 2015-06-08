@@ -1,15 +1,6 @@
 'use-strict';
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    return {
-      inBasket: (!!this.props.inBasket) || false
-    };
-  },
-  handleRemove: function(e) {
-    e.preventDefault();
-    this.props.onItemRemove(this.props.data);
-  },
   componentDidMount: function(){
     $(React.findDOMNode(this))
       .hover(
@@ -19,25 +10,24 @@ module.exports = React.createClass({
   },
   deentitify: function(string){
     var entity = { 
-      amp: '&',
-      quot: '"',
-      rsquo: '\'',
-      rsquo: '\'',
-      ldquo: '\"',
-      rdquo: '\"',
-      lt: '<',
-      gt: '>'
+      amp: '&', quot: '"',
+      rsquo: '\'', rsquo: '\'',
+      ldquo: '\"', rdquo: '\"',
+      lt: '<', gt: '>'
     };
     return string.replace(/&([^&;]+);/g, function(a, b) {
       var r = entity[b];
       return typeof r === 'string' ? r : a;
     });
   },
+  showModal: function(){
+    this.props.onShowModal(this.props.data);
+  },
   render: function() {
     if (this.props.data.multimedia) 
       var img = <img className='image' src={this.props.data.multimedia.resource.src}/>
     return (
-      <div className='movie'>
+      <div className='movie' onClick={this.showModal}>
         <div className='movie-wrapper'>
           <div className='title'>{this.deentitify(this.props.data.display_title)}</div>
           {img}
