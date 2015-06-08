@@ -6,10 +6,10 @@ var FilmModal = require('./components/film-modal');
 module.exports = React.createClass({
   loadMovies: function(offset) {
     var url = offset ? 
-      'http://localhost:1337/api.nytimes.com' +
+      'http://corsproxy.ianjohnson.co/api.nytimes.com' +
       '/svc/movies/v2/reviews/picks.json?' + '&offset=' + offset + 
       '&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351' : // Ternary
-      'http://localhost:1337/api.nytimes.com' +
+      'http://corsproxy.ianjohnson.co/api.nytimes.com' +
       '/svc/movies/v2/reviews/picks.json' +
       '?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351'
     $.ajax({
