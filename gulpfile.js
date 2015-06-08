@@ -117,10 +117,5 @@ gulp.task('watch', function() {
 
 
 gulp.task('dev', ['clean'], function() {
-<<<<<<< HEAD
-  gulp.start('html', 'sass', 'browserify', 'watch');
-});
-=======
   gulp.start('html', 'sass', 'browserify', 'copy-fonts', 'watch');
 });
->>>>>>> e60fd0e92b80c69dfcf03fe20c3ddb599553c590
