@@ -5,15 +5,14 @@ var NavigationControls = require('./navigation-controls');
 
 module.exports = React.createClass({
   render: function() {
-    var itemNodes = this.props.data.map(function(item, index) {
-      return (
-        <Movie data={item} key={index} />
-      );
-    });
     return (
       <div className="movies-list">
-        {itemNodes}
-        <NavigationControls prev={this.props.prev} next={this.props.next} />
+        {this.props.data.map(function(item, i){
+          return (
+            <Movie data={item} key={i} onShowModal={this.props.onShowModal} />
+          );
+        }, this )}
+        <NavigationControls navigate={this.props.navigate} />
       </div>
     );
   }

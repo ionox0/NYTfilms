@@ -3,14 +3,17 @@
 module.exports = React.createClass({
   getInitialState: function () {
     return {
-      currentPage: 0
+      currentStart: 0
     };
   },
   previous: function(e) {
-    this.props.prev(this.state.currentPage);
+    if (this.state.currentStart < 20) return;
+    this.props.navigate(this.state.currentStart - 20);
+    this.setState({currentStart: this.state.currentStart - 20})
   },
   next: function(e) {
-    this.props.next(this.state.currentPage);
+    this.props.navigate(this.state.currentStart + 20);
+    this.setState({currentStart: this.state.currentStart + 20})
   },
   render: function() {
     return (

@@ -1,12 +1,19 @@
 'use-strict';
 
-var Movie = require('./views/movie');
-var MovieList = require('./views/movie-list');
+var MovieList = require('./components/movie-list');
+var FilmModal = require('./components/film-modal');
 
 module.exports = React.createClass({
   loadMovies: function(offset) {
+    var url = offset ? 
+      'http://localhost:1337/api.nytimes.com' +
+      '/svc/movies/v2/reviews/picks.json?' + '&offset=' + offset + 
+      '&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351' : // Ternary
+      'http://localhost:1337/api.nytimes.com' +
+      '/svc/movies/v2/reviews/picks.json' +
+      '?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351'
     $.ajax({
-      url: 'http://localhost:1337/api.nytimes.com/svc/movies/v2/reviews/picks.json?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351', //pagination: ' + offset? 'offset=' + offset:'' + '
+      url: url,
       dataType: 'json',
       success: function(data){
         this.setState({data: data});
@@ -21,20 +28,27 @@ module.exports = React.createClass({
   },
   componentDidMount: function(){
     this.loadMovies();
-    //setInterval(this.loadItemsFromServer, this.props.pollInterval);
+    //setInterval(this.loadMovies, this.props.pollInterval);
   },
-  previousPage: function(currentPage){
-    console.log(currentPage);
-  },
-  nextPage: function(currentPage){
-    console.log('here');
+  navigate: function(currentPage){
     this.loadMovies(currentPage);
   },
+  showModal: function(film){
+    this.setState({modalIsShowing: true, modalFilm: film});
+  },
+  closeModal: function(){
+    this.setState({modalIsShowing: false})
+  },
   render: function(){
+    if (this.state.modalIsShowing) 
+      var filmModal = <FilmModal film={this.state.modalFilm} onCloseModal={this.closeModal} />
     return (
       <div className='app'>
-        <h1>Critics&#39; Picks</h1>
-        <MovieList data={this.state.data.results} prev={this.previousPage} next={this.nextPage} />
+        {filmModal}
+        <h1>New York Times Film Critics&#39; Picks</h1>
+        <MovieList data={this.state.data.results} 
+          navigate={this.navigate} 
+          onShowModal={this.showModal} />
       </div>
     );
   }
