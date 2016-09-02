@@ -8,10 +8,10 @@ module.exports = React.createClass({
     var url = offset ? 
       'http://corsproxy.ianjohnson.co/api.nytimes.com' +
       '/svc/movies/v2/reviews/picks.json?' + '&offset=' + offset + 
-      '&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351' : // Ternary
+      '&api-key=816b932a821743339951b199b73a5999' : // Ternary
       'http://corsproxy.ianjohnson.co/api.nytimes.com' +
       '/svc/movies/v2/reviews/picks.json' +
-      '?&api-key=a6e8a0b00b9e5d5181be666ce22d751e:4:72221351'
+      '?&api-key=816b932a821743339951b199b73a5999'
     $.ajax({
       url: url,
       dataType: 'json',

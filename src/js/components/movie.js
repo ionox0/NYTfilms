@@ -25,7 +25,7 @@ module.exports = React.createClass({
   },
   render: function() {
     if (this.props.data.multimedia) 
-      var img = <img className='image' src={this.props.data.multimedia.resource.src}/>
+      var img = <img className='image' src={this.props.data.multimedia.src}/>
     return (
       <div className='movie' onClick={this.showModal}>
         <div className='movie-wrapper'>
